@@ -4,11 +4,27 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/cryptobeast/app.js"
+            "name": "Launch app.js",
+            "program": "${workspaceRoot}/cryptobeast/app.js",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch dashboard.js",
+            "program": "${workspaceRoot}/cryptobeast/dashboard.js",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch sell-all.js",
+            "program": "${workspaceRoot}/cryptobeast/sell-all.js",
+            "console": "integratedTerminal"
         }
     ]
 }

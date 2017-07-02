@@ -18,7 +18,8 @@
     "jsonic": "^0.3.0",
     "mongodb": "^2.2.29",
     "request": ">= 2.35.0",
-    "signalr-client": "0.0.17"
+    "signalr-client": "0.0.17",
+    "chalk":"*"
   },
   "repository": {
     "type": "git",
