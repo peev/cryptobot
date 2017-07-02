@@ -73,7 +73,7 @@ function theAlgorithm(prevCoinsData, currentData){
 }
 
 function buyLimit(market, quantity, rate){
-    var url = 'https://bittrex.com/api/v1.1/market/buylimit?apikey=' + APIKEY + '&nonce=' + getNonce() + '&market=' + market + '&quantity='+ quantity + '&rate=' + rate ;
+    var url = 'https://bittrex.com/api/v1.1/market/buylimit?apikey=' + APIKEY + '&market=' + market + '&quantity='+ quantity + '&rate=' + rate ;
     bittrex.sendCustomRequest( url, function( data ) {
     console.log( "-------------------Transaction successful----------------------" );
     console.log(data);
@@ -87,12 +87,7 @@ function sellLimit(market, quantity, rate){
     });
 }
 
-function getNonce() {
-    this.__lastNonce = Math.floor(new Date().getTime() / 1000);
-    return this.__lastNonce;
-  }
-
-setInterval(saveCurrenciesJob, 15000);
+setInterval(saveCurrenciesJob, 10000);
 
 // function getPrevData(id){
 //     MarketSummaries.findById(new ObjectId(id), function (err, coinsData) {

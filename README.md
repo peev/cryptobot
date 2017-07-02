@@ -7,14 +7,9 @@ Bitterex Api Docs - https://bittrex.com/home/api
 
 Installation
 ----
-install it most convenient via npm:
-```sh
-$ npm install node.bittrex.api
-```
 
-##### or
 
-fetch the project via git:
+Fetch the project via git:
 ```sh
 $ git clone https://github.com/peev/cryptobot.git
 ```
@@ -23,27 +18,22 @@ then meet the package dependencies:
 $ cd cryptobot/
 $ npm install
 ```
+then run the cryptobeast/app.js via nodemon VSCode node debuger:
+```sh
+$ nodemon cryptobeast/app.js
+```
+
 
 First steps
 ----
 
-include node.bittrex.api.js into your project:
-```javascript
-var bittrex = require('./node.bittrex.api.js');
-```
-
 ##### configure
 ```javascript
-bittrex.options({
-  'apikey' : API_KEY,
-  'apisecret' : API_SECRET, 
-  'stream' : true, // will be removed from future versions
-  'verbose' : true,
-  'cleartext' : false 
-});
+const APIKEY = 'your_key';
+const APISECRET = 'your_secret';
 ```
 
-By default the returned data is an object, in order to get clear text you have to add the option **cleartext** (streams will always return text):
+By default the returned data by bittrex.node.api is an object, in order to get clear text you have to add the option **cleartext** (streams will always return text):
 ```javascript
 'cleartext' : true
 ```
