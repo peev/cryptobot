@@ -1,8 +1,8 @@
 const chalk = require('chalk');
 // BITTREX ACCOUNT CONFIGURATIONS
 const bittrex = require('../node.bittrex.api');
-const APIKEY = 'b7075913770c48b1be44b039d7967a7b';
-const APISECRET = 'cc4db2baa80c4067bbc2bc089b3ebc07';
+const APIKEY = '924376f53659490c9cb5e46b48fcf6bb';
+const APISECRET = 'e0f0a8ae97da4c35b1ba0d6f6d4bb2c5';
 
 bittrex.options({ 
 'apikey' : APIKEY,
