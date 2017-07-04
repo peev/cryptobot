@@ -25,6 +25,13 @@
             "name": "Launch sell-all.js",
             "program": "${workspaceRoot}/cryptobeast/sell-all.js",
             "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch socketApp.js",
+            "program": "${workspaceRoot}/cryptobeast/socketApp.js",
+            "console": "integratedTerminal"
         }
     ]
 }

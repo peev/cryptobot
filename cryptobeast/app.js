@@ -10,8 +10,8 @@ var MarketSummaries = mongoose.model('MarketSummaries', {
 
 // BITTREX ACCOUNT CONFIGURATIONS
 const bittrex = require('../node.bittrex.api');
-const APIKEY = 'b7075913770c48b1be44b039d7967a7b';
-const APISECRET = 'cc4db2baa80c4067bbc2bc089b3ebc07';
+const APIKEY = '924376f53659490c9cb5e46b48fcf6bb';
+const APISECRET = 'e0f0a8ae97da4c35b1ba0d6f6d4bb2c5';
 
 bittrex.options({ 
 'apikey' : APIKEY,
@@ -23,10 +23,10 @@ bittrex.options({
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
-    ratio: 0.12,
-    quantity: 0.0006,
+    ratio: 0.03,
+    quantity: 0.0001,
     currency: 'BTC',
-    interval: 6000,
+    interval: 2000,
     buyPremium: 1,
     sellTarget: 1.40
 }
@@ -76,7 +76,7 @@ function theAlgorithm(prevCoinsData, currentData){
         if(ratio > tradeRules.ratio && ratio != NaN && currentData[i].MarketName.startsWith(tradeRules.currency)){
             var quantity =  tradeRules.quantity / currentData[i].Ask;
             console.log(chalk.green(new Date().toUTCString(), 'RULE ACCEPTED / ATTEMPT BUY'));
-            console.log(chalk.magenta(new Date().toUTCString(), currentData[i].MarketName, ratio, currentData[i].Ask));
+            console.log(chalk.green(new Date().toUTCString(), currentData[i].MarketName, ratio, currentData[i].Ask));
             buyLimit(currentData[i].MarketName, quantity, currentData[i].Ask * tradeRules.buyPremium);
         }
     }
@@ -87,18 +87,18 @@ function buyLimit(market, quantity, rate){
     var url = 'https://bittrex.com/api/v1.1/market/buylimit?apikey=' + APIKEY + '&market=' + market + '&quantity='+ quantity + '&rate=' + rate ;
     bittrex.sendCustomRequest( url, function( data ) {
         if (data.success){
-            console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL BUY ----------------------" ));
+            console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL BUY ORDER PLACE ----------------------" ));
             console.log(chalk.green(new Date().toUTCString(), market, quantity, data.message, rate));
-            console.log(chalk.yellow(new Date().toUTCString(), 'PLACE SELL'));
             sellLimit(market, quantity, rate);
         } else {
-            console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL BUY ----------------------" ));
+            console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL BUY ORDER PLACE  ----------------------" ));
             console.log(chalk.red(new Date().toUTCString(), market, quantity, data.message, rate));
         }
     });
 }
 
 function sellLimit(market, quantity, rate){
+    console.log(chalk.yellow(new Date().toUTCString(), 'PLACE SELL'));
     var sellCurrency = market.split("-").pop(1);
     bittrex.getbalance({ currency : sellCurrency }, function( data ) {
         console.log('SELL CURRENCY', sellCurrency);
@@ -107,10 +107,10 @@ function sellLimit(market, quantity, rate){
             var sellLimitUrl = 'https://bittrex.com/api/v1.1/market/selllimit?apikey=' + APIKEY + '&market=' + market + '&quantity='+ data.result.Available + '&rate=' + rate * tradeRules.sellTarget;
             bittrex.sendCustomRequest( sellLimitUrl, function( data ) {
                 if (data.success){
-                        console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL SELL ----------------------" ));
+                        console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL SELL ORDER PLACE ----------------------" ));
                         console.log(chalk.green(new Date().toUTCString(), market, quantity, data.message, rate * tradeRules.sellTarget));
                     } else {
-                        console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL SELL ----------------------" ));
+                        console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL SELL ORDER PLACE ----------------------" ));
                         console.log(chalk.red(new Date().toUTCString(), market, quantity, data.message, rate * tradeRules.sellTarget));
                     }
                 });

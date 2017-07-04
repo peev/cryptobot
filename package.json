@@ -14,12 +14,13 @@
   "license": "MIT",
   "dependencies": {
     "JSONStream": ">= 0.8.4",
+    "chalk": "^2.0.1",
     "event-stream": ">= 3.1.5",
     "jsonic": "^0.3.0",
     "mongodb": "^2.2.29",
+    "mongoose": "^4.11.1",
     "request": ">= 2.35.0",
-    "signalr-client": "0.0.17",
-    "chalk":"*"
+    "signalr-client": "0.0.17"
   },
   "repository": {
     "type": "git",
