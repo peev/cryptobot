@@ -20,7 +20,8 @@
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.1",
     "request": ">= 2.35.0",
-    "signalr-client": "0.0.17"
+    "signalr-client": "0.0.17",
+    "socket.io": "^2.0.3"
   },
   "repository": {
     "type": "git",

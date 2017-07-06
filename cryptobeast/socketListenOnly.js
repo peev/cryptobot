@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-mongoose.connect('mongodb://localhost/BittrexMarketsState');
+mongoose.connect('mongodb://localhost/BittrexMarketsState3');
 var Schema = mongoose.Schema;
 // BITTREX ACCOUNT CONFIGURATIONS
 const bittrex = require('../node.bittrex.api');
@@ -61,7 +61,7 @@ bittrex.websockets.listen( function( data ) {
                 console.log(err);
             } else {
                 console.log(chalk.cyan(new Date().toUTCString(), 'SUMMARY STATE SUCESSFULLY SAVED\n'));
-                console.log(result);
+                console.log(result.MarketName);
             }
         });
       });

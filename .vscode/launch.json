@@ -32,6 +32,13 @@
             "name": "Launch socketApp.js",
             "program": "${workspaceRoot}/cryptobeast/socketApp.js",
             "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch socketListenOnly.js",
+            "program": "${workspaceRoot}/cryptobeast/socketListenOnly.js",
+            "console": "integratedTerminal"
         }
     ]
 }

@@ -1,7 +1,18 @@
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-mongoose.connect('mongodb://localhost/BittrexMarketsState');
+mongoose.connect('mongodb://localhost/BittrexMarketsState2');
 var Schema = mongoose.Schema;
+
+// LOG OUTPUT
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+  log_file.write(d + '\n');
+  log_stdout.write(d + '\n');
+};
 
 // BITTREX ACCOUNT CONFIGURATIONS
 const bittrex = require('../node.bittrex.api');
@@ -35,11 +46,11 @@ bittrex.options({
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
     ratio: 0.03,
-    quantity: 0.0001,
+    quantity: 0.0006,
     currency: 'BTC',
     interval: 2000,
-    buyPremium: 1,
-    sellTarget: 1.40
+    buyPremium: 1.001,
+    sellTarget: 1.05
 }
 
 
@@ -83,8 +94,6 @@ bittrex.websockets.listen( function( data ) {
                     theAlgorithm(prevSummary[prevSummary.length-2].toObject(), marketsDelta);
                   }
                 })
-
-                //theAlgorithm(prevCoinsData, result);
             }
         });
       });
@@ -101,9 +110,9 @@ function theAlgorithm(prevCoinsData, currentData){
 
         if(ratio > tradeRules.ratio && ratio != NaN && currentData.MarketName.startsWith(tradeRules.currency)){
             var quantity =  tradeRules.quantity / currentData.Ask;
-            //console.log(chalk.green(new Date().toUTCString(), 'RULE ACCEPTED / ATTEMPT BUY'));
-            //console.log(chalk.green(new Date().toUTCString(), currentData.MarketName, "RT%:", ratio, "$:", currentData.Ask));
-            //buyLimit(currentData.MarketName, quantity, currentData.Ask * tradeRules.buyPremium);
+            console.log(chalk.green(new Date().toUTCString(), 'RULE ACCEPTED / ATTEMPT BUY'));
+            console.log(chalk.green(new Date().toUTCString(), currentData.MarketName, "RT%:", ratio, "$:", currentData.Ask));
+            buyLimit(currentData.MarketName, quantity, currentData.Ask * tradeRules.buyPremium);
         }
     }
 
