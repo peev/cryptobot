@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-mongoose.connect('mongodb://localhost/BittrexMarketsState3');
+// mongoose.connect('mongodb://localhost/BittrexMarketsState3');
+mongoose.connect('mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB');
 var Schema = mongoose.Schema;
 // BITTREX ACCOUNT CONFIGURATIONS
 const bittrex = require('../node.bittrex.api');
