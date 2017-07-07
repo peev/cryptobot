@@ -13,14 +13,8 @@ console.log = function (d) { //
 };
 
 // mongoose.connect('mongodb://localhost/BittrexMarketsState3');
-mongoose.connect('mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB-07-07-17-20:30', {
-  server: {
-    socketOptions: {
-      socketTimeoutMS: 0,
-      connectTimeoutMS: 0
-    }
-  }
-});
+mongoose.connect('mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB2');
+
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open.');
 });
