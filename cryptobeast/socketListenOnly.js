@@ -21,7 +21,6 @@ mongoose.connect('mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazo
     }
   }
 });
-
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open.');
 });
