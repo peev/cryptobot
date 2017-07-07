@@ -17,6 +17,7 @@
     "chalk": "^2.0.1",
     "event-stream": ">= 3.1.5",
     "jsonic": "^0.3.0",
+    "mongo-xlsx": "^1.0.12",
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.1",
     "request": ">= 2.35.0",

@@ -39,6 +39,13 @@
             "name": "Launch socketListenOnly.js",
             "program": "${workspaceRoot}/cryptobeast/socketListenOnly.js",
             "console": "integratedTerminal"
+        },
+         {
+            "type": "node",
+            "request": "launch",
+            "name": "exportExcel.js",
+            "program": "${workspaceRoot}/cryptobeast/exportExcel.js",
+            "console": "integratedTerminal"
         }
     ]
 }
