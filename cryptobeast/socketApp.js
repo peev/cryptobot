@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-mongoose.connect('mongodb://localhost/BittrexMarketsState6');
+mongoose.connect('mongodb://localhost/BittrexMarketsState9');
 var Schema = mongoose.Schema;
 
 // LOG OUTPUT
@@ -8,6 +8,7 @@ var fs = require('fs');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
+var boughtCurrencies = [];
 
 console.log = function(d) { //
   log_file.write(d + '\n');
@@ -45,12 +46,12 @@ bittrex.options({
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
-    ratio: 0.03,
+    ratio: 0.01,
     quantity: 0.0006,
     currency: 'BTC',
     interval: 2000,
     buyPremium: 1.001,
-    sellTarget: 1.05
+    sellTarget: 1.15
 }
 
 
@@ -112,7 +113,11 @@ function theAlgorithm(prevCoinsData, currentData){
             var quantity =  tradeRules.quantity / currentData.Ask;
             console.log(chalk.green(new Date().toUTCString(), 'RULE ACCEPTED / ATTEMPT BUY'));
             console.log(chalk.green(new Date().toUTCString(), currentData.MarketName, "RT%:", ratio, "$:", currentData.Ask));
-            buyLimit(currentData.MarketName, quantity, currentData.Ask * tradeRules.buyPremium);
+            if (boughtCurrencies.indexOf(currentData.MarketName) > -1){
+                console.log(chalk.red(new Date().toUTCString(), "CURRENCY ALREADY BOUGHT"));
+            } else {
+                buyLimit(currentData.MarketName, quantity, currentData.Ask * tradeRules.buyPremium);
+            }
         }
     }
 
@@ -123,6 +128,7 @@ function buyLimit(market, quantity, rate){
             console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL BUY ORDER PLACE ----------------------" ));
             console.log(chalk.green(new Date().toUTCString(), market, "QNT:",quantity,'RT:', rate));
             sellLimit(market, quantity, rate);
+            boughtCurrencies.push(market);
         } else {
             console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL BUY ORDER PLACE  ----------------------" ));
             console.log(chalk.red(new Date().toUTCString(), market, "QNT:",quantity,'RT:', rate));
