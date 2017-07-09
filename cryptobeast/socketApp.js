@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-mongoose.connect('mongodb://localhost/BittrexMarketsState9');
+var curTime =  new Date().getTime();
+mongoose.connect('mongodb://localhost/BittrexTradingApp-temp-'+ curTime);
 var Schema = mongoose.Schema;
 
 // LOG OUTPUT
@@ -46,7 +47,7 @@ bittrex.options({
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
-    ratio: 0.01,
+    ratio: 0.12,
     quantity: 0.0006,
     currency: 'BTC',
     interval: 2000,
