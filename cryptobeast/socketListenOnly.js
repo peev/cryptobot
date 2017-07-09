@@ -1,4 +1,3 @@
-var mongoose = require('mongoose');
 const chalk = require('chalk');
 
 var MongoClient = require('mongodb').MongoClient;
