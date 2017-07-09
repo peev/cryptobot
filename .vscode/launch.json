@@ -29,8 +29,15 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch socketApp.js",
-            "program": "${workspaceRoot}/cryptobeast/socketApp.js",
+            "name": "Launch socketSummary.js",
+            "program": "${workspaceRoot}/cryptobeast/socketSummary.js",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch socketAppExchangeState.js",
+            "program": "${workspaceRoot}/cryptobeast/socketAppExchangeState.js",
             "console": "integratedTerminal"
         },
         {

@@ -41,18 +41,17 @@ bittrex.options({
     'apikey': APIKEY,
     'apisecret': APISECRET,
     'stream': false,
-    'verbose': false,
+    'verbose': true,
     'cleartext': false
 });
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
     ratio: 0.12,
-    quantity: 0.0006,
+    quantity: 0.015,
     currency: 'BTC',
-    interval: 2000,
     buyPremium: 1.001,
-    sellTarget: 1.15
+    sellTarget: 1.12
 }
 
 
