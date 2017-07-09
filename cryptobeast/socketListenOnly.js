@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB2';
+var url = 'mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB';
 
 // LOG OUTPUT
 var fs = require('fs');
