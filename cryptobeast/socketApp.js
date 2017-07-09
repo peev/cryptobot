@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 const chalk = require('chalk');
-mongoose.connect('mongodb://localhost/BittrexMarketsState2');
+mongoose.connect('mongodb://localhost/BittrexMarketsState6');
 var Schema = mongoose.Schema;
 
 // LOG OUTPUT
