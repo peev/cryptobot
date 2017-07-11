@@ -1,9 +1,11 @@
 
 const chalk = require('chalk');
 var curTime = new Date().getTime();
+
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/MarketHistory_Fills'
-;
+var url = 'mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB';
+
+
 var btcmarkets = [];
 var boughtCurrencies = [];
 
