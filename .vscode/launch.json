@@ -30,7 +30,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch socketSummary.js",
-            "program": "${workspaceRoot}/cryptobeast/socketSummary.js",
+            "program": "${workspaceRoot}/cryptobeast/socketAppSummary.js",
             "console": "integratedTerminal"
         },
         {
