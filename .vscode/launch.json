@@ -53,6 +53,28 @@
             "name": "exportExcel.js",
             "program": "${workspaceRoot}/cryptobeast/exportExcel.js",
             "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "socketListenOrderBook.js",
+            "program": "${workspaceRoot}/cryptobeast/socketListenOrderBook.js",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "YoBitsocketAppExchangeState.js",
+            "program": "${workspaceRoot}/cryptobeast/YoBitsocketAppExchangeState.js",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "socketAppListenExchangeState.js",
+            "program": "${workspaceRoot}/cryptobeast/socketAppListenExchangeState.js",
+            "console": "integratedTerminal"
         }
     ]
 }
+

@@ -31,10 +31,10 @@ function sellLimit(market, quantity, rate){
             var sellLimitUrl = 'https://bittrex.com/api/v1.1/market/selllimit?apikey=' + APIKEY + '&market=' + market + '&quantity='+ quantity + '&rate=' + rate;
             bittrex.sendCustomRequest( sellLimitUrl, function( data ) {
                 if (data.success){
-                        console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL SELL ----------------------" ));
+                        console.log(chalk.green(new Date().toUTCString(), "------------------- SUCCESSFUL SELL ORDER PLACED ----------------------" ));
                         console.log(chalk.green(new Date().toUTCString(), market, quantity, data.message));
                     } else {
-                        console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL SELL ----------------------" ));
+                        console.log(chalk.red(new Date().toUTCString(), "------------------- UNSUCCESSFUL SELL ORDER PLACED ----------------------" ));
                         console.log(chalk.red(new Date().toUTCString(), market, quantity, data.message));
                     }
                 });

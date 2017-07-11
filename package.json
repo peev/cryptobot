@@ -20,9 +20,10 @@
     "mongo-xlsx": "^1.0.12",
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.1",
-    "request": ">= 2.35.0",
+    "request": "^2.81.0",
     "signalr-client": "0.0.17",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "yobit": "0.0.1"
   },
   "repository": {
     "type": "git",

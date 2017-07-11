@@ -22,11 +22,11 @@ bittrex.options({
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
-    ratio: 0.02,
-    quantity: 0.0001,
+    ratio: 0.03,
+    quantity: 0.0009,
     currency: 'BTC',
-    buyPremium: 1.001,
-    sellTarget: 1.15
+    buyPremium: 1.0005,
+    sellTarget: 1.002
 }
 
 bittrex.getbalance({ currency: tradeRules.currency }, function (data) {
@@ -49,19 +49,15 @@ bittrex.getmarkets(function (data) {
                 data.A.forEach(function (data_for) {
                     if (data_for.Fills.length > 0) {
                         var marketsDelta = data_for.Fills[0];
-                        // console.log(chalk.cyan(new Date().toUTCString(), 'Market Update for: '));
-                        // console.log(chalk.cyan(new Date().toUTCString() + data_for.MarketName));
-                        // console.log('TYPE:', marketsDelta.OrderType, 'QT:', marketsDelta.Quantity, '$:', marketsDelta.Rate, 'TS:', marketsDelta.TimeStamp);
                         var col = db.collection(data_for.MarketName);
                         col.insertOne({ marketsDelta }, function (err, res) {
                             if (err) console.log(err);
-                            // console.log(new Date().toUTCString() + "SAVED TO MONGO");
-                            
+                  
                             var cursor = col.find().sort( { _id : -1 } ).limit(2);
                             cursor.toArray(function (err, results) {
                                 if (err) throw err;
                                 if(results.length > 1){
-                                    theAlgorithm(results[1].marketsDelta, results[0].marketsDelta, data_for.MarketName )
+                                    theAlgorithm(results[1].marketsDelta, results[0].marketsDelta, data_for.MarketName)
                                 }
                             });
                         });
@@ -78,7 +74,7 @@ function theAlgorithm(prevCoinsData, currentData, marketName) {
     var ratio = 0;
     ratio = (currentData.Rate - prevCoinsData.Rate) / prevCoinsData.Rate;
     if (ratio > 0 && marketName.startsWith(tradeRules.currency)) {
-        console.log(chalk.green(new Date().toUTCString(), marketName, "RT%:", ratio, "$:", currentData.Rate));
+        console.log(chalk.cyan(new Date().toUTCString(), marketName, "RT%:", ratio, "$:", currentData.Rate));
     }
 
     if (ratio > tradeRules.ratio && ratio != NaN && marketName.startsWith(tradeRules.currency)) {
