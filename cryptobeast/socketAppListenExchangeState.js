@@ -2,7 +2,7 @@
 const chalk = require('chalk');
 var curTime = new Date().getTime();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost/MarketHistory_Fills'
+var url = 'mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/MarketHistory_Fills'
 ;
 var btcmarkets = [];
 var boughtCurrencies = [];
@@ -19,20 +19,6 @@ bittrex.options({
     'stream': false,
     'verbose': true,
     'cleartext': false
-});
-
-// ALGORITHM RULES CONFIGURATIONS
-var tradeRules = {
-    ratio: 0.03,
-    quantity: 0.0009,
-    currency: 'BTC',
-    buyPremium: 1.0005,
-    sellTarget: 1.002
-}
-
-bittrex.getbalance({ currency: tradeRules.currency }, function (data) {
-    console.log(chalk.yellow('\n', new Date().toUTCString(), 'YOUR CURRENT', tradeRules.currency, "BALANCE IS:"));
-    console.log(chalk.yellow(JSON.stringify(data.result), '\n'));
 });
 
 bittrex.getmarkets(function (data) {
