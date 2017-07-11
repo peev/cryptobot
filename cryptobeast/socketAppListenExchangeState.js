@@ -21,6 +21,16 @@ bittrex.options({
     'cleartext': false
 });
 
+// ALGORITHM RULES CONFIGURATIONS
+var tradeRules = {
+    ratio: 0.03,
+    quantity: 0.0009,
+    currency: 'BTC',
+    buyPremium: 1.0005,
+    sellTarget: 1.002
+}
+
+
 bittrex.getmarkets(function (data) {
 
     data.result.forEach(function (curData) {
