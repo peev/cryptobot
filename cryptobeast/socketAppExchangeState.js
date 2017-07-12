@@ -22,11 +22,11 @@ bittrex.options({
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
-    ratio: 0.03,
-    quantity: 0.0009,
+    ratio: 0.08,
+    quantity: 0.002,
     currency: 'BTC',
     buyPremium: 1.0005,
-    sellTarget: 1.002
+    sellTarget: 1.12
 }
 
 bittrex.getbalance({ currency: tradeRules.currency }, function (data) {
@@ -48,19 +48,21 @@ bittrex.getmarkets(function (data) {
             if (data.M === 'updateExchangeState') {
                 data.A.forEach(function (data_for) {
                     if (data_for.Fills.length > 0) {
-                        var marketsDelta = data_for.Fills[0];
-                        var col = db.collection(data_for.MarketName);
-                        col.insertOne({ marketsDelta }, function (err, res) {
-                            if (err) console.log(err);
-                  
-                            var cursor = col.find().sort( { _id : -1 } ).limit(2);
-                            cursor.toArray(function (err, results) {
-                                if (err) throw err;
-                                if(results.length > 1){
-                                    theAlgorithm(results[1].marketsDelta, results[0].marketsDelta, data_for.MarketName)
-                                }
+                        data_for.Fills.forEach(function (filllData) {
+                            var marketsDelta = filllData;
+                            var col = db.collection(data_for.MarketName);
+                            col.insertOne({ marketsDelta }, function (err, res) {
+                                if (err) console.log(err);
+                                var cursor = col.find().sort( { _id : -1 } ).limit(2);
+                                cursor.toArray(function (err, results) {
+                                    if (err) throw err;
+                                    if(results.length > 1){
+                                        theAlgorithm(results[1].marketsDelta, results[0].marketsDelta, data_for.MarketName)
+                                    }
+                                });
                             });
                         });
+
                     }
                 });
             }

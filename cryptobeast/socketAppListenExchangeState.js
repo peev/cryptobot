@@ -57,12 +57,19 @@ bittrex.getmarkets(function (data) {
             if (data.M === 'updateExchangeState') {
                 data.A.forEach(function (data_for) {
                     if (data_for.Fills.length > 0) {
-                        var marketsDelta = data_for.Fills[0];
-                        var col = db.collection(data_for.MarketName);
-                        col.insertOne({ marketsDelta }, function (err, res) {
-                            if (err) console.log(err);
-                            console.log(chalk.green(new Date().toUTCString(), data_for.MarketName, "RESULT:", res.result.ok));
+                        data_for.Fills.forEach(function (filllData) {
+                            var marketsDelta = filllData;
+                            var col = db.collection(data_for.MarketName);
+                            col.insertOne({ marketsDelta }, function (err, res) {
+                                if (err) console.log(err);
+                                var cursor = col.find().sort( { _id : -1 } ).limit(2);
+                                cursor.toArray(function (err, results) {
+                                    if (err) throw err;
+                                    console.log(chalk.green(new Date().toUTCString(), data_for.MarketName, "RESULT:", res.result.ok));
+                                });
+                            });
                         });
+
                     }
                 });
             }
