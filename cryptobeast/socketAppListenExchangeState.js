@@ -5,6 +5,16 @@ var curTime = new Date().getTime();
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://cb-admin:0887pass@ec2-34-203-208-180.compute-1.amazonaws.com:27017/cryptobotDB';
 
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+  log_file.write(d + '\n');
+  log_stdout.write(d + '\n');
+};
+
 
 var btcmarkets = [];
 var boughtCurrencies = [];
