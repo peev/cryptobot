@@ -61,6 +61,7 @@ bittrex.getmarkets(function (data) {
                         var col = db.collection(data_for.MarketName);
                         col.insertOne({ marketsDelta }, function (err, res) {
                             if (err) console.log(err);
+                            console.log(chalk.green(new Date().toUTCString(), data_for.MarketName, "RESULT:", res.result.ok));
                         });
                     }
                 });
