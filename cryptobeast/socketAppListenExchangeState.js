@@ -64,7 +64,7 @@ bittrex.getmarkets(function (data) {
                                 if (err) console.log(err);
                                 var cursor = col.find().sort( { _id : -1 } ).limit(2);
                                 cursor.toArray(function (err, results) {
-                                    if (err) throw err;
+                                    if (err) console.log(chalk.red( err ));
                                     console.log(chalk.green(new Date().toUTCString(), data_for.MarketName, "RESULT:", res.result.ok));
                                 });
                             });
