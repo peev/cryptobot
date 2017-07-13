@@ -57,10 +57,12 @@ bittrex.getmarkets(function (data) {
             if (data.M === 'updateExchangeState') {
                 data.A.forEach(function (data_for) {
                     if (data_for.Fills.length > 0) {
+                        console.log(new Date().toUTCString(), 'FILLES ARE FETCHED:', data_for.Fills);
                         data_for.Fills.forEach(function (filllData) {
                             var marketsDelta = filllData;
                             var col = db.collection(data_for.MarketName);
                             col.insertOne({ marketsDelta }, function (err, res) {
+                                console.log(new Date().toUTCString(), 'FILLES ARE INSERTED:');
                                 if (err) console.log(err);
                                 var cursor = col.find().sort( { _id : -1 } ).limit(2);
                                 cursor.toArray(function (err, results) {
