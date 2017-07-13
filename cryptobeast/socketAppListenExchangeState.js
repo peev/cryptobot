@@ -52,21 +52,21 @@ bittrex.getmarkets(function (data) {
     });
 
     MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
+        if (err) console.log(chalk.red( err ));
         bittrex.websockets.subscribe(btcmarkets, function (data) {
             if (data.M === 'updateExchangeState') {
                 data.A.forEach(function (data_for) {
                     if (data_for.Fills.length > 0) {
-                        console.log(new Date().toUTCString(), 'FILLES ARE FETCHED:', data_for.Fills);
+                        console.log(chalk.blue(new Date().toUTCString(), 'FILLES ARE FETCHED:', data_for.Fills.length));
                         data_for.Fills.forEach(function (filllData) {
                             var marketsDelta = filllData;
                             var col = db.collection(data_for.MarketName);
-                            col.insertOne({ marketsDelta }, function (err, res) {
-                                console.log(new Date().toUTCString(), 'FILLES ARE INSERTED:');
-                                if (err) console.log(err);
+                            col.insertOne({ marketsDelta }, function (err2, res) {
+                                console.log(chalk.cyan(new Date().toUTCString(), 'FILLES ARE INSERTED:', res.result.ok));
+                                if (err2) console.log(chalk.red(err2));
                                 var cursor = col.find().sort( { _id : -1 } ).limit(2);
-                                cursor.toArray(function (err, results) {
-                                    if (err) console.log(chalk.red( err ));
+                                cursor.toArray(function (err3, results) {
+                                    if (err3) console.log(chalk.red( err3 ));
                                     console.log(chalk.green(new Date().toUTCString(), data_for.MarketName, "RESULT:", res.result.ok));
                                 });
                             });
