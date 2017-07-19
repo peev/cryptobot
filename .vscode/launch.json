@@ -73,7 +73,7 @@
             "request": "launch",
             "name": "socketAppListenExchangeState.js",
             "program": "${workspaceRoot}/cryptobeast/socketAppListenExchangeState.js",
-            "console": "integratedTerminal"
+            "cwd": "${workspaceRoot}"
         }
     ]
 }
