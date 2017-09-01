@@ -1,0 +1,17 @@
+{
+  "name": "cryptominute",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.18.1",
+    "mongo-xlsx": "^1.0.12",
+    "mongodb": "^2.2.31",
+    "node.bittrex.api": "^0.5.1",
+  }
+}
