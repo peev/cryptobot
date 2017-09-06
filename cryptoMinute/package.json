@@ -12,6 +12,6 @@
     "moment": "^2.18.1",
     "mongo-xlsx": "^1.0.12",
     "mongodb": "^2.2.31",
-    "node.bittrex.api": "^0.5.1",
+    "node.bittrex.api": "^0.5.1"
   }
 }
