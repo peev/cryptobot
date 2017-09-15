@@ -2,14 +2,14 @@
 const chalk = require('chalk');
 var curTime = new Date().getTime();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost/BittrexTradingAppEchange-temp-' + curTime;
+var url = 'mongodb://localhost/BittrexTradingAppEchange';
 var btcmarkets = [];
 var boughtCurrencies = [];
 
 // BITTREX ACCOUNT CONFIGURATIONS
 const bittrex = require('../node.bittrex.api');
-const APIKEY = '924376f53659490c9cb5e46b48fcf6bb';
-const APISECRET = 'e0f0a8ae97da4c35b1ba0d6f6d4bb2c5';
+const APIKEY = 'f46393d68eae4728930ea4d39d95c669';
+const APISECRET = 'fe8ca839642144da9c2b6b59232ccad0';
 
 
 bittrex.options({
@@ -22,11 +22,11 @@ bittrex.options({
 
 // ALGORITHM RULES CONFIGURATIONS
 var tradeRules = {
-    ratio: 0.08,
-    quantity: 0.002,
+    ratio: 0.01,
+    quantity: 0.0005,
     currency: 'BTC',
     buyPremium: 1.0005,
-    sellTarget: 1.12
+    sellTarget: 1.02
 }
 
 bittrex.getbalance({ currency: tradeRules.currency }, function (data) {
@@ -129,5 +129,4 @@ function sellLimit(market, quantity, rate) {
             }, 100);
         }
     });
-
 }
